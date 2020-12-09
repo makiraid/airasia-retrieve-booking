@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/app/www",
-    "dev": "nodemon ./bin/app/www",
+    "dev": "nodemon ./bin/app/app.js",
     "lint": "eslint bin",
     "lint:fix": "npm run lint -- --fix"
   },
