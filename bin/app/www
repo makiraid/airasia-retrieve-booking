@@ -5,7 +5,9 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+require('dotenv').config()
+
+var app = require('./app');
 var debug = require('debug')('airasia-retrieve:server');
 var http = require('http');
 

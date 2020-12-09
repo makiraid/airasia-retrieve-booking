@@ -15,7 +15,7 @@ const getToken = () => new Promise((resolve, reject) => {
 	.catch(error => reject(error))
 });
 
-const retrieveBooking = (params) => new Promise((resolve, reject) => {
+const getKey = (params) => new Promise((resolve, reject) => {
     const payload = {
         originCode: params.originCode,
         recordLocator: params.recordLocator,
@@ -27,11 +27,11 @@ const retrieveBooking = (params) => new Promise((resolve, reject) => {
 	fetch('https://ssor.airasia.com/um/v2/bookings/validate-and-link', {
 		method: 'POST',
 		headers: {
-			'content-type': 'application/json',
+			'Content-Type': 'application/json',
 			'x-aa-client-id': params.id,
             'x-api-key': params.apiKey
 		},
-		body: payload
+		body: JSON.stringify(payload)
 	})
 	.then(async response => {
 		const result = response.json();
@@ -42,16 +42,32 @@ const retrieveBooking = (params) => new Promise((resolve, reject) => {
 
 const getBookingData = (params) => new Promise((resolve, reject) => {
 	const key = params.respStatus.split('?key=')[1]
-	console.log(key)
 	fetch('https://p.apiairasia.com/payment/deeplink/api/getbookingdata', {
 		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json, text/plain, */*', 
-			'Key': '7fb982c7-399b-11eb-b3bd-cd9f443bd5db1607462559.05'
+			'Key': key
 		}
 	})
 	.then(async response => {
-		console.log(response)
+		const result = response.json();
+		resolve(result)
+	})
+	.catch(error => reject(error))
+});
+
+const getItineryID = (params) => new Promise((resolve, reject) => {
+	const payload = {
+		dotrezsignature: params.DecodedKey.DotrezSignature,
+		usersession: 'cc=en-gb&mcc=IDR&rc=WWWA&ad=&p=&st=null&rsc=0'
+	};
+	fetch('https://p.apiairasia.com/payment/booking/info', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+	.then(async response => {
 		const result = response.json();
 		resolve(result)
 	})
@@ -60,6 +76,7 @@ const getBookingData = (params) => new Promise((resolve, reject) => {
 
 module.exports = {
     getToken,
-    retrieveBooking,
-    getBookingData
+    getKey,
+	getBookingData,
+	getItineryID
 }

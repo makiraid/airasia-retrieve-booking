@@ -3,20 +3,24 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/server/www",
-    "dev": "nodemon ./bin/server/www",
+    "start": "node ./bin/app/www",
+    "dev": "nodemon ./bin/app/www",
     "lint": "eslint bin",
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "joi": "^14.3.1",
+    "moment": "^2.29.1",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "eslint": "^7.15.0"

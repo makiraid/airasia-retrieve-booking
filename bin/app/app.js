@@ -5,10 +5,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('../modules/index');
+var usersRouter = require('../modules/users');
 
-const airAsia = require('./routes/airasia/index');
+const airAsia = require('../modules/airasia/index');
 
 var app = express();
 
