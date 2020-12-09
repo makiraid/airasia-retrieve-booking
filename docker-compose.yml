@@ -1,9 +1,11 @@
+version: '3.7'
+
 services:
-  web:
-    build: .
-    command: npm start
-    volumes:
-      - .:/usr/app/
-      - /usr/app/node_modules
+
+  tools-prod:
+    container_name: tools-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5003:5003"
+      - '5003:5003'
